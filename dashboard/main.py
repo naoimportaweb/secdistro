@@ -1,5 +1,9 @@
 
-import sys, os
+import sys, os, traceback, inspect;
+
+ROOT = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())));
+sys.path.append(ROOT);
+os.environ["ROOT"] = ROOT; # CRIAR UMA VRIAVEL NO AMBIENTE.
 
 from gui.uis.windows.main_window.functions_main_window import *
 from qt_core import *
@@ -7,9 +11,11 @@ from gui.core.json_settings import Settings
 from gui.uis.windows.main_window import *
 from gui.widgets import *
 
+
+
 # ADJUST QT FONT DPI FOR HIGHT SCALE AN 4K MONITOR
-os.environ["QT_FONT_DPI"] = "96"
-# IF IS 4K MONITOR ENABLE 'os.environ["QT_SCALE_FACTOR"] = "2"'
+os.environ["QT_FONT_DPI"] = "96" # IF IS 4K MONITOR ENABLE 'os.environ["QT_SCALE_FACTOR"] = "2"'
+
 
 # MAIN WINDOW
 class MainWindow(QMainWindow):
@@ -105,11 +111,6 @@ class MainWindow(QMainWindow):
                     title = "Settings Left Column",
                     icon_path = Functions.set_svg_icon("icon_settings.svg")
                 )
-        
-        # TITLE BAR MENU
-        # ///////////////////////////////////////////////////////////////
-        
-        # SETTINGS TITLE BAR
         if btn.objectName() == "btn_top_settings":
             # Toogle Active
             if not MainFunctions.right_column_is_visible(self):
@@ -128,41 +129,21 @@ class MainWindow(QMainWindow):
             top_settings.set_active_tab(False)            
 
         # DEBUG
-        print(f"Button {btn.objectName()}, clicked!")
+        #print(f"Button {btn.objectName()}, clicked!")
 
-    # LEFT MENU BTN IS RELEASED
-    # Run function when btn is released
-    # Check funtion by object name / btn_id
-    # ///////////////////////////////////////////////////////////////
     def btn_released(self):
-        # GET BT CLICKED
         btn = SetupMainWindow.setup_btns(self)
-
-        # DEBUG
         print(f"Button {btn.objectName()}, released!")
 
-    # RESIZE EVENT
-    # ///////////////////////////////////////////////////////////////
     def resizeEvent(self, event):
         SetupMainWindow.resize_grips(self)
 
-    # MOUSE CLICK EVENTS
-    # ///////////////////////////////////////////////////////////////
     def mousePressEvent(self, event):
         # SET DRAG POS WINDOW
         self.dragPos = event.globalPos()
 
-
-# SETTINGS WHEN TO START
-# Set the initial class and also additional parameters of the "QApplication" class
-# ///////////////////////////////////////////////////////////////
 if __name__ == "__main__":
-    # APPLICATION
-    # ///////////////////////////////////////////////////////////////
     app = QApplication(sys.argv)
     app.setWindowIcon(QIcon("icon.png"))
     window = MainWindow()
-
-    # EXEC APP
-    # ///////////////////////////////////////////////////////////////
     sys.exit(app.exec_())
