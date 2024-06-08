@@ -1,6 +1,12 @@
 
 import sys
+
+# IMPORT QT CORE
+# ///////////////////////////////////////////////////////////////
 from qt_core import *
+
+# PY GRIPS
+# ///////////////////////////////////////////////////////////////
 class PyGrips(QWidget):
     def __init__(self, parent, position, disable_color = False):
 

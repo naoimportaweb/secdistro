@@ -223,7 +223,7 @@
               <string notr="true">font-size: 16pt</string>
              </property>
              <property name="text">
-              <string>Widgets Page aqui</string>
+              <string>Custom Widgets Page</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>

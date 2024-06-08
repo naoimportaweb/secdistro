@@ -12,6 +12,7 @@ from gui.uis.windows.main_window import *
 from gui.widgets import *
 
 
+
 # ADJUST QT FONT DPI FOR HIGHT SCALE AN 4K MONITOR
 os.environ["QT_FONT_DPI"] = "96" # IF IS 4K MONITOR ENABLE 'os.environ["QT_SCALE_FACTOR"] = "2"'
 
